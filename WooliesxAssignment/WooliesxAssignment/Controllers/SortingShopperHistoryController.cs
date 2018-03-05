@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using WooliesxAssignment.Controllers;
+using WooliesxAssignment.Enum;
 using WooliesxAssignment.Models;
 using WooliesxAssignment.Services;
 
@@ -16,8 +17,8 @@ namespace WooliesxAssignment.Controllers
     public class SortingShopperHistoryController : BaseController
     {
         private readonly ILogger _logger;
-        private readonly IShopperHistoryData _shopperHistoryData;
-        public SortingShopperHistoryController(IShopperHistoryData shopperHistoryData, ILogger logger)
+        private readonly ISortData _shopperHistoryData;
+        public SortingShopperHistoryController(ISortData shopperHistoryData, ILogger logger)
         {
             _logger = logger;
             _shopperHistoryData = shopperHistoryData;
@@ -25,9 +26,9 @@ namespace WooliesxAssignment.Controllers
 
         [HttpGet]
         [Route("sort")]
-        public async Task<List<ShopperHistory>> GetShopperHistory()
+        public async Task<List<Product>> GetShopperHistory(Sort sort)
         {
-            return await _shopperHistoryData.GetShopperHistory();
+            return await _shopperHistoryData.SortDataAsync(sort);
         }
     }
 }

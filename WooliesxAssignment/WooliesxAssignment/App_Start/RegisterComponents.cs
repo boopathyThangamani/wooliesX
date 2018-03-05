@@ -6,6 +6,7 @@ using System.Reflection;
 using WooliesxAssignment.Controllers;
 using WooliesxAssignment.Filters;
 using WooliesxAssignment.Helpers;
+using WooliesxAssignment.Repositories;
 using WooliesxAssignment.Services;
 
 namespace WooliesxAssignment.App_Start
@@ -20,7 +21,8 @@ namespace WooliesxAssignment.App_Start
             containerBuilder.RegisterType<UserDetails>().As<IUserDetails>();
             containerBuilder.RegisterType<ReadConfig>().As<IReadConfig>();
             containerBuilder.RegisterType<ShopperHistoryRepository>().As<IShopperHistoryRepository>();
-            containerBuilder.RegisterType<ShopperHistoryData>().As<IShopperHistoryData>();
+            containerBuilder.RegisterType<ProductRepository>().As<IProductRepository>();
+            containerBuilder.RegisterType<SortData>().As<ISortData>();
             containerBuilder.Register(httpClient => new HttpClient()).As<HttpClient>();
             return containerBuilder;
         }

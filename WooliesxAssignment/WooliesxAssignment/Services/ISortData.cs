@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WooliesxAssignment.Enum;
 using WooliesxAssignment.Models;
 
 namespace WooliesxAssignment.Services
 {
-    public interface IShopperHistoryData
+    public interface ISortData
     {
-        Task<List<ShopperHistory>> GetShopperHistory();
+        Task<List<Product>> SortDataAsync(Sort sortOption);
     }
 }
