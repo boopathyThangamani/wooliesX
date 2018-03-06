@@ -33,23 +33,36 @@ namespace WooliesxAssignment.Services
             switch (sortOption)
             {
                 case Sort.Ascending:
-                   
                     return products.OrderBy(x => x.Name).ToList();
-                    break;
-                case Sort.Decending:
+                case Sort.Descending:
                     return products.OrderByDescending(x => x.Name).ToList();
-                    break;
-                case Sort.Low:
-                    return products.OrderByDescending(x => x.Price).ToList();
-                    break;
                 case Sort.High:
+                    return products.OrderByDescending(x => x.Price).ToList();
+                case Sort.Low:
                     return products.OrderBy(x => x.Price).ToList();
-                    break;
                 case Sort.Recommended:
                 default:
                     var shopperHistory = await _shopperHistoryRepository.GetShopperHistoryAsync();
-                    shopperHistory.
-                    break;
+                    var result =shopperHistory.SelectMany(p => p.Products).GroupBy(p=>p.Name).Select(c=>new Product(){Name = c.Key, Quantity = c.Sum(qty=>qty.Quantity), Price = c.Max(prc=>prc.Price)}).ToList();
+                   
+                    List<Product> notFound = new List<Product>();
+                    foreach (var prod in products)
+                    {
+                        var found = false;
+                        foreach (var r in result)
+                        {
+                            if (r.Name == prod.Name)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) notFound.Add(prod);
+                    }
+                    result.AddRange(notFound);
+                   
+                    return result.OrderByDescending(x => x.Quantity).ToList();
 
             }
         }

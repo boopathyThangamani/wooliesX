@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooliesxAssignment", "WooliesxAssignment\WooliesxAssignment.csproj", "{4466898A-C80E-4841-B9B0-0C79616DEA4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{70CB15AD-1227-4AEE-9B26-43AA4E077CC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{4466898A-C80E-4841-B9B0-0C79616DEA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4466898A-C80E-4841-B9B0-0C79616DEA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4466898A-C80E-4841-B9B0-0C79616DEA4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70CB15AD-1227-4AEE-9B26-43AA4E077CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CB15AD-1227-4AEE-9B26-43AA4E077CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CB15AD-1227-4AEE-9B26-43AA4E077CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CB15AD-1227-4AEE-9B26-43AA4E077CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E22A836-53A2-4B16-BE37-07BA9051D55C}
 	EndGlobalSection
 EndGlobal

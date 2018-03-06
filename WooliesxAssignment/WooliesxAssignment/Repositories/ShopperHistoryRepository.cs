@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Script.Serialization;
 using Serilog;
 using WooliesxAssignment.Extensions;
@@ -15,9 +16,9 @@ namespace WooliesxAssignment.Repositories
     public class ShopperHistoryRepository : IShopperHistoryRepository
     {
         private readonly ILogger _logger;
-        private readonly HttpClient _client;
+        private readonly IHttpClientDecorator _client;
         private readonly IReadConfig _readConfig;
-        public ShopperHistoryRepository(HttpClient httpClient, ILogger logger, IReadConfig readConfig)
+        public ShopperHistoryRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig)
         {
             _client = httpClient;
             _logger = logger;
@@ -27,22 +28,19 @@ namespace WooliesxAssignment.Repositories
         public async Task<List<ShopperHistory>> GetShopperHistoryAsync()
 
         {
-            Uri endpointUri = new Uri(_readConfig.ReadBaseUrl());
+            Uri endpointUri = new Uri(_readConfig.ReadBaseUrl()+_readConfig.ReadShopperHistory());
             endpointUri = endpointUri.AddQuery("Token", _readConfig.UserId());
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, endpointUri);
             _logger.Information("Sending request to {uri}", endpointUri);
-                //var response = await _client.SendAsync(requestMessage);
+            var response = await _client.SendAsync(requestMessage);
             //if (response.StatusCode != HttpStatusCode.OK)
             //{
             //    //_logger.Error("");
+            //    throw new HttpResponseException();
             //}
-            //var contents = await response.Content.ReadAsStringAsync();
-            using (StreamReader file = File.OpenText(@"ShopperHistory.json"))
-            {
+            var contents = await response.Content.ReadAsStringAsync();
                 var deserialised = new JavaScriptSerializer();
-                //return deserialised.Deserialize<List<ShopperHistory>>(contents);
-                return deserialised.Deserialize<List<ShopperHistory>>(file.ReadToEnd());
-            }
+            return deserialised.Deserialize<List<ShopperHistory>>(contents);
         }
     }
 }

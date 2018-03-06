@@ -10,5 +10,8 @@ namespace WooliesxAssignment.Helpers
     {
         string ReadBaseUrl();
         string UserId();
+        string ReadProduct();
+        string ReadShopperHistory();
+        string ReadTrollyCaclulator();
     }
 }

@@ -9,5 +9,8 @@ namespace WooliesxAssignment.Helpers
     {
         public static readonly string UserId = "userId";
         public static readonly string BaseUrl = "baseUrl";
+        public static readonly string shopperHisoty = "shopperHistory";
+        public static readonly string product="product";
+        public static readonly string trollyCalculator = "trollyCalculator";
     }
 }

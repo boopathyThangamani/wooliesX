@@ -21,7 +21,7 @@ namespace WooliesxAssignment.Services
             return new Models.User()
             {
                 Token = "7bb17606-bd7e-4c30-b8bd-08255140a1e1",
-                Name = "Boopathy"
+                Name = "Boopathy Thangamani"
             };
         }
     }

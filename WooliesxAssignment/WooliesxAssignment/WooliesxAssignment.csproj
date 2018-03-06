@@ -179,6 +179,7 @@
     <Compile Include="App_Start\SerilogRegitration.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\TrolleyCalculatorController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Enum\Sort.cs" />
     <Compile Include="Extensions\HttpUriExtenstions.cs" />
@@ -188,20 +189,27 @@
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ErrorMessageConstants.cs" />
+    <Compile Include="Helpers\HttpClientDecorator.cs" />
+    <Compile Include="Helpers\IHttpClientDecorator.cs" />
     <Compile Include="Helpers\IReadConfig.cs" />
     <Compile Include="Helpers\ReadConfig.cs" />
     <Compile Include="Models\ShopperHistory.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\TrolleyItems.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IShopperHistoryRepository.cs" />
+    <Compile Include="Repositories\ITrolleyCalculatorRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\TrolleyCalculatorRepository.cs" />
+    <Compile Include="Services\ITrolleyCalculator.cs" />
     <Compile Include="Services\IUserDetails.cs" />
     <Compile Include="Services\ISortData.cs" />
     <Compile Include="Services\SortData.cs" />
     <Compile Include="Repositories\ShopperHistoryRepository.cs" />
     <Compile Include="Controllers\SortingShopperHistoryController.cs" />
+    <Compile Include="Services\TrolleyCalculator.cs" />
     <Compile Include="Services\UserDetails.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +223,7 @@
     <Content Include="ShopperHistory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\WooliesxAssignment20180306041645 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

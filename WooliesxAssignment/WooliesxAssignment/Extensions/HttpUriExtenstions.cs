@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using WooliesxAssignment.Helpers;
 
@@ -10,8 +8,8 @@ namespace WooliesxAssignment.Extensions
     {
         public static Uri AddQuery(this Uri uri, string name, string value)
         {
-            if(string.IsNullOrWhiteSpace(name))
-            throw new ArgumentNullException(ErrorMessageConstants.NullUri);
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(ErrorMessageConstants.NullUri);
             var uriBuilder = new UriBuilder(uri);
             var httpValueCollection = HttpUtility.ParseQueryString(uri.Query);
             httpValueCollection.Add(name, value);

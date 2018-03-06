@@ -1,12 +1,7 @@
-﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using WooliesxAssignment.Controllers;
+using Serilog;
 using WooliesxAssignment.Enum;
 using WooliesxAssignment.Models;
 using WooliesxAssignment.Services;
@@ -18,6 +13,7 @@ namespace WooliesxAssignment.Controllers
     {
         private readonly ILogger _logger;
         private readonly ISortData _shopperHistoryData;
+
         public SortingShopperHistoryController(ISortData shopperHistoryData, ILogger logger)
         {
             _logger = logger;
@@ -26,9 +22,10 @@ namespace WooliesxAssignment.Controllers
 
         [HttpGet]
         [Route("sort")]
-        public async Task<List<Product>> GetShopperHistory(Sort sort)
+        public async Task<IHttpActionResult> GetShopperHistory(Sort sortOption)
         {
-            return await _shopperHistoryData.SortDataAsync(sort);
+
+            return Ok(await _shopperHistoryData.SortDataAsync(sortOption));
         }
     }
 }

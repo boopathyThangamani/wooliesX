@@ -1,15 +1,12 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using Autofac.Integration.WebApi;
 using AutofacSerilogIntegration;
-using System.Net.Http;
-using System.Reflection;
-using WooliesxAssignment.Controllers;
-using WooliesxAssignment.Filters;
 using WooliesxAssignment.Helpers;
 using WooliesxAssignment.Repositories;
 using WooliesxAssignment.Services;
 
-namespace WooliesxAssignment.App_Start
+namespace WooliesxAssignment
 {
     public static class RegisterComponents
     {
@@ -18,12 +15,16 @@ namespace WooliesxAssignment.App_Start
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterLogger();
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            containerBuilder.RegisterType<UserDetails>().As<IUserDetails>();
-            containerBuilder.RegisterType<ReadConfig>().As<IReadConfig>();
-            containerBuilder.RegisterType<ShopperHistoryRepository>().As<IShopperHistoryRepository>();
-            containerBuilder.RegisterType<ProductRepository>().As<IProductRepository>();
-            containerBuilder.RegisterType<SortData>().As<ISortData>();
-            containerBuilder.Register(httpClient => new HttpClient()).As<HttpClient>();
+            containerBuilder.RegisterType<UserDetails>().As<IUserDetails>().InstancePerRequest();
+            containerBuilder.RegisterType<ReadConfig>().As<IReadConfig>().InstancePerRequest();
+            containerBuilder.RegisterType<ShopperHistoryRepository>().As<IShopperHistoryRepository>()
+                .InstancePerRequest();
+            containerBuilder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerRequest();
+            containerBuilder.RegisterType<SortData>().As<ISortData>().InstancePerRequest();
+            //containerBuilder.Register(httpClient => new HttpClient()).As<HttpClient>();
+            containerBuilder.RegisterType<HttpClientDecorator>().As<IHttpClientDecorator>().InstancePerRequest();
+            containerBuilder.RegisterType<TrolleyCalculator>().As<ITrolleyCalculator>().InstancePerRequest();
+            containerBuilder.RegisterType<TrolleyCalculatorRepository>().As<ITrolleyCalculatorRepository>().InstancePerRequest();
             return containerBuilder;
         }
     }

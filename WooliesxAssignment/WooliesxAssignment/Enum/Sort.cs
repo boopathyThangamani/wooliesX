@@ -7,10 +7,10 @@ namespace WooliesxAssignment.Enum
 {
     public enum Sort
     {
+        Ascending,
+        Descending,
         Low,
         High,
-        Ascending,
-        Decending,
         Recommended
     }
 }
