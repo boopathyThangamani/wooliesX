@@ -20,11 +20,13 @@ namespace WooliesxAssignment.Repositories
         private readonly ILogger _logger;
         private readonly IHttpClientDecorator _client;
         private readonly IReadConfig _readConfig;
-        public ProductRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig)
+        private readonly IDeserializer _deserializer;
+        public ProductRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig, IDeserializer deserializer)
         {
             _client = httpClient;
             _logger = logger;
             _readConfig = readConfig;
+            _deserializer = deserializer;
         }
         public async Task<List<Product>> GetProductsAsync()
         {
@@ -40,8 +42,7 @@ namespace WooliesxAssignment.Repositories
 
             }
             var contents = await response.Content.ReadAsStringAsync();
-            var deserialised = new JavaScriptSerializer();
-            return deserialised.Deserialize<List<Product>>(contents);
+            return _deserializer.Deserialize<List<Product>>(contents);
         }
     }
 }

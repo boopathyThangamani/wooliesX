@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeserialiserUnitTest.cs" />
+    <Compile Include="HttpUriExtenstionsUnitTest.cs" />
+    <Compile Include="SerialiserUnitTest.cs" />
     <Compile Include="ReadConfigUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

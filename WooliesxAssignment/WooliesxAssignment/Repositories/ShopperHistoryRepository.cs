@@ -18,11 +18,13 @@ namespace WooliesxAssignment.Repositories
         private readonly ILogger _logger;
         private readonly IHttpClientDecorator _client;
         private readonly IReadConfig _readConfig;
-        public ShopperHistoryRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig)
+        private readonly IDeserializer _deserializer;
+        public ShopperHistoryRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig,IDeserializer deserializer)
         {
             _client = httpClient;
             _logger = logger;
             _readConfig = readConfig;
+            _deserializer = deserializer;
         }
 
         public async Task<List<ShopperHistory>> GetShopperHistoryAsync()
@@ -33,14 +35,13 @@ namespace WooliesxAssignment.Repositories
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, endpointUri);
             _logger.Information("Sending request to {uri}", endpointUri);
             var response = await _client.SendAsync(requestMessage);
-            //if (response.StatusCode != HttpStatusCode.OK)
-            //{
-            //    //_logger.Error("");
-            //    throw new HttpResponseException();
-            //}
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                _logger.Error("");
+                throw new HttpResponseException(response);
+            }
             var contents = await response.Content.ReadAsStringAsync();
-                var deserialised = new JavaScriptSerializer();
-            return deserialised.Deserialize<List<ShopperHistory>>(contents);
+            return _deserializer.Deserialize<List<ShopperHistory>>(contents);
         }
     }
 }

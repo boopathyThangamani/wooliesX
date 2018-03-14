@@ -188,11 +188,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Deserializer.cs" />
     <Compile Include="Helpers\ErrorMessageConstants.cs" />
     <Compile Include="Helpers\HttpClientDecorator.cs" />
+    <Compile Include="Helpers\IDeserializer.cs" />
     <Compile Include="Helpers\IHttpClientDecorator.cs" />
     <Compile Include="Helpers\IReadConfig.cs" />
+    <Compile Include="Helpers\ISerializer.cs" />
     <Compile Include="Helpers\ReadConfig.cs" />
+    <Compile Include="Helpers\Serializer.cs" />
     <Compile Include="Models\ShopperHistory.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\TrolleyItems.cs" />

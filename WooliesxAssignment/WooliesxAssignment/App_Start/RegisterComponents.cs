@@ -25,6 +25,8 @@ namespace WooliesxAssignment
             containerBuilder.RegisterType<HttpClientDecorator>().As<IHttpClientDecorator>().InstancePerRequest();
             containerBuilder.RegisterType<TrolleyCalculator>().As<ITrolleyCalculator>().InstancePerRequest();
             containerBuilder.RegisterType<TrolleyCalculatorRepository>().As<ITrolleyCalculatorRepository>().InstancePerRequest();
+            containerBuilder.RegisterType<Serializer>().As<ISerializer>().SingleInstance();
+            containerBuilder.RegisterType<Deserializer>().As<IDeserializer>().SingleInstance();
             return containerBuilder;
         }
     }

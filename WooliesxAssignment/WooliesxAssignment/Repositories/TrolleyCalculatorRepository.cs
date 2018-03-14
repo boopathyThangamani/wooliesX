@@ -21,12 +21,14 @@ namespace WooliesxAssignment.Repositories
         private readonly ILogger _logger;
         private readonly IHttpClientDecorator _client;
         private readonly IReadConfig _readConfig;
+        private readonly ISerializer _serializer;
 
-        public TrolleyCalculatorRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig)
+        public TrolleyCalculatorRepository(IHttpClientDecorator httpClient, ILogger logger, IReadConfig readConfig, ISerializer serializer)
         {
             _client = httpClient;
             _logger = logger;
             _readConfig = readConfig;
+            _serializer = serializer;
         }
         public async Task<double> TrolleyCalculator(TrolleyItems items)
         {
@@ -34,25 +36,19 @@ namespace WooliesxAssignment.Repositories
             endpointUri = endpointUri.AddQuery("Token", _readConfig.UserId());
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, endpointUri)
             {
-                Content = new StringContent(SerialiseTrolleyItems(items), Encoding.UTF8, "application/json")
+                Content = new StringContent(_serializer.Serialise(items), Encoding.UTF8, "application/json")
             };
             _logger.Information("Sending request to {uri}", endpointUri);
             var response = await _client.SendAsync(requestMessage);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                _logger.Error("");
+                _logger.Error("Error while sending request to {uri}",endpointUri);
                 throw new HttpResponseException(response);
             }
             var contents = await response.Content.ReadAsStringAsync();
             double total;
             double.TryParse(contents, out total);
             return total;
-        }
-
-        private string SerialiseTrolleyItems(TrolleyItems items)
-        {
-            var serialize = new JavaScriptSerializer();
-            return serialize.Serialize(items);
         }
     }
 }
